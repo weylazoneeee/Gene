@@ -2611,15 +2611,6 @@ loader.classList.add(
 "show"
 );
 
-
-/*
-Le compteur commence à 01:00.
-La validation de la simulation
-se fait après 5 secondes,
-donc lorsque le compteur arrive
-à 00:55.
-*/
-
 let seconds=60;
 
 document.getElementById(
@@ -2637,7 +2628,7 @@ seconds--;
 const minutes=
 Math.floor(seconds/60);
 
-const displaySeconds=
+const remainingSeconds=
 seconds%60;
 
 document.getElementById(
@@ -2645,30 +2636,24 @@ document.getElementById(
 ).textContent=
 String(minutes).padStart(2,"0")+
 ":"+
-String(displaySeconds).padStart(2,"0");
+String(remainingSeconds).padStart(2,"0");
 
 
 /*
-5 secondes se sont écoulées :
-60 → 59 → 58 → 57 → 56 → 55
+Le compteur affiche 1 minute,
+mais la validation simulée
+se fait après 5 secondes.
 */
 
 if(seconds===55){
 
 clearInterval(timer);
 
-setTimeout(
-()=>{
-
 loader.classList.remove(
 "show"
 );
 
 showPaymentSuccess();
-
-},
-300
-);
 
 }
 
@@ -3023,34 +3008,9 @@ async()=>{
 
 try{
 
-if(
-!document.fullscreenElement &&
-!document.webkitFullscreenElement
-){
-
-if(
-document.documentElement.requestFullscreen
-){
+if(!document.fullscreenElement){
 
 await document.documentElement.requestFullscreen();
-
-}
-
-else if(
-document.documentElement.webkitRequestFullscreen
-){
-
-document.documentElement.webkitRequestFullscreen();
-
-}
-
-else if(
-document.documentElement.webkitRequestFullScreen
-){
-
-document.documentElement.webkitRequestFullScreen();
-
-}
 
 }
 
@@ -3069,31 +3029,17 @@ error
 );
 
 
-function updateFullscreenButton(){
-
-const isFullscreen=
-!!document.fullscreenElement ||
-!!document.webkitFullscreenElement;
+document.addEventListener(
+"fullscreenchange",
+()=>{
 
 fullscreenBtn.style.display=
-isFullscreen
+document.fullscreenElement
 ?"none"
 :"block";
 
 }
-
-
-document.addEventListener(
-"fullscreenchange",
-updateFullscreenButton
 );
-
-document.addEventListener(
-"webkitfullscreenchange",
-updateFullscreenButton
-);
-
-updateFullscreenButton();
 
 
 /* =========================
