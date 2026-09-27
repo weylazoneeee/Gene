@@ -2,3039 +2,2217 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Acheter des pièces</title>
 
 <style>
-*{box-sizing:border-box}
-
-body{
-margin:0;
-background:#f0f2f5;
-color:#333;
-font-family:Arial,Roboto,sans-serif;
-display:flex;
-justify-content:center;
-min-height:100vh
-}
-
-.container{
-width:100%;
-max-width:450px;
-min-height:100vh;
-background:#fff;
-box-shadow:0 0 10px rgba(0,0,0,.1);
-display:flex;
-flex-direction:column;
-position:relative
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
 }
 
-header.main-header{
-display:flex;
-align-items:center;
-justify-content:center;
-padding:13px;
-border-bottom:1px solid #ddd;
-position:relative;
-background:#fff
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #fff;
+    color: #111;
 }
 
-.main-header h1{
-margin:0;
-font-weight:600;
-font-size:15px;
-color:#555
+body {
+    display: flex;
+    justify-content: center;
 }
 
-#homeBackBtn{
-position:absolute;
-left:10px;
-background:none;
-border:0;
-font-size:20px;
-cursor:pointer
-}
-
-.header-menu-wrap{
-position:absolute;
-right:12px
-}
-
-.header-menu-btn{
-background:none;
-border:0;
-font-size:22px;
-cursor:pointer;
-padding:4px 8px
-}
-
-.menu-dropdown{
-display:none;
-position:absolute;
-right:0;
-top:100%;
-min-width:190px;
-background:#fff;
-border:1px solid #ddd;
-border-radius:10px;
-box-shadow:0 6px 20px rgba(0,0,0,.12);
-z-index:200;
-overflow:hidden
-}
-
-.menu-dropdown.show{display:block}
-
-.menu-dropdown button{
-width:100%;
-border:0;
-background:#fff;
-padding:12px 16px;
-text-align:left;
-cursor:pointer;
-font-size:14px
-}
-
-.menu-dropdown button:hover{background:#f5f5f5}
-
-.content-wrapper{
-flex:1;
-overflow-y:auto
-}
-
-.top-nav{
-display:flex;
-align-items:center;
-gap:8px;
-padding:22px 15px;
-border-bottom:1px solid #eee
-}
-
-.top-nav>img{
-width:40px;
-height:40px;
-border-radius:50%;
-flex-shrink:0
-}
-
-.top-target-box{
-flex:1;
-min-width:0
-}
-
-.top-target-input-row{
-position:relative
-}
-
-.top-target-input-row input{
-width:100%;
-height:40px;
-padding:10px 34px 10px 11px;
-border:1px solid #e2e2e2;
-border-radius:9px;
-outline:none;
-background:#fafafa;
-font-size:14px
-}
-
-.top-target-input-row input:focus{
-border-color:#fe2c55;
-background:#fff
-}
-
-.top-target-spinner{
-display:none;
-position:absolute;
-right:11px;
-top:12px;
-width:15px;
-height:15px;
-border:2px solid #ddd;
-border-top-color:#fe2c55;
-border-radius:50%;
-animation:spin .7s linear infinite
-}
-
-.top-target-spinner.show{display:block}
-
-@keyframes spin{to{transform:rotate(360deg)}}
-
-.top-target-status{
-display:none;
-margin-top:4px;
-font-size:10px
-}
-
-.top-target-status.scanning{
-color:#fe2c55;
-font-size:11px;
-animation:pulse .8s ease-in-out infinite
-}
-
-@keyframes pulse{
-0%,100%{opacity:.4}
-50%{opacity:1}
-}
-
-.target-card{
-display:none;
-margin:0 15px 12px;
-border:1px solid #eee;
-border-radius:12px;
-padding:14px;
-background:#fafafa
-}
-
-.target-card.show{display:block}
-
-.target-card-top{
-display:flex;
-align-items:center;
-gap:12px
-}
-
-.target-avatar{
-width:56px;
-height:56px;
-border-radius:50%;
-object-fit:cover;
-background:#eee;
-flex-shrink:0
-}
-
-.target-info{
-flex:1;
-min-width:0
+.app {
+    width: 100%;
+    max-width: 450px;
+    min-height: 100vh;
+    background: #fff;
+    position: relative;
+    padding-bottom: 90px;
 }
 
-.target-name{
-font-size:16px;
-font-weight:700;
-color:#000;
-white-space:nowrap;
-overflow:hidden;
-text-overflow:ellipsis
+button,
+input {
+    font-family: inherit;
 }
 
-.target-username{
-font-size:12px;
-font-weight:600;
-color:#666;
-margin-top:2px
-}
+/* HEADER */
 
-.tiktok-verified-badge{
-display:inline-flex;
-vertical-align:middle;
-align-items:center;
-margin-left:4px
+.header {
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-bottom: 1px solid #eee;
+    background: #fff;
+    z-index: 5;
 }
 
-.recharge-section{
-padding:15px
+.header h1 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
 }
 
-.recharge-section h2{
-margin:0;
-font-size:20px;
-font-weight:400
+.back-btn,
+.menu-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    font-size: 26px;
+    width: 44px;
+    height: 44px;
 }
 
-.recharge-section>p{
-font-size:12px;
-color:#fe2c55;
-margin-bottom:15px
+.back-btn {
+    left: 4px;
 }
 
-.coin-options{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:8px;
-margin-bottom:20px
+.menu-btn {
+    right: 4px;
+    font-size: 23px;
 }
 
-.coin-option{
-height:60px;
-border:1px solid #ddd;
-border-radius:6px;
-background:#f7f7f7;
-cursor:pointer;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center
-}
+/* SEARCH */
 
-.coin-option:hover,
-.coin-option.selected{
-background:#fff;
-border-color:#ffc107;
-box-shadow:0 0 5px rgba(255,193,7,.6)
+.search-area {
+    padding: 18px 16px 10px;
 }
 
-.top-row{
-display:flex;
-align-items:center;
-gap:4px
+.search-box {
+    position: relative;
 }
 
-.coin-option img{
-width:24px;
-height:24px
+.search-box input {
+    width: 100%;
+    height: 46px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    outline: none;
+    padding: 0 45px 0 16px;
+    font-size: 15px;
+    background: #f7f7f7;
 }
 
-.coin-option span{
-font-size:16px;
-font-weight:700
+.search-box input:focus {
+    border-color: #aaa;
+    background: #fff;
 }
 
-.coin-option p{
-margin:5px 0 0;
-font-size:12px;
-color:#777
+.search-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: #777;
 }
 
-.custom-btn{
-font-weight:700;
-font-size:14px
+.search-message {
+    font-size: 13px;
+    color: #777;
+    margin-top: 8px;
+    min-height: 18px;
 }
 
-.card{
-display:flex;
-align-items:center;
-background:#f7f7f7;
-border-radius:12px;
-padding:15px;
-margin-top:15px
-}
+/* ACCOUNT */
 
-.card img{
-width:30px;
-height:30px;
-margin-right:15px
+.account-card {
+    margin: 8px 16px 15px;
+    padding: 14px;
+    border: 1px solid #eee;
+    border-radius: 13px;
+    display: none;
+    align-items: center;
+    background: #fff;
 }
 
-.card h4{
-margin:0;
-font-size:16px
+.account-card.show {
+    display: flex;
 }
 
-.card p{
-margin:0;
-font-size:12px;
-color:#666
+.avatar {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #eee;
+    flex-shrink: 0;
 }
 
-footer{
-padding:15px;
-background:#fff;
-border-top:1px solid #eee;
-position:sticky;
-bottom:0;
-z-index:10
+.account-info {
+    margin-left: 12px;
+    min-width: 0;
 }
 
-.special-offer{
-display:flex;
-justify-content:space-between;
-font-size:12px;
-color:#666;
-margin-bottom:10px
+.account-name {
+    font-size: 16px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
-.buy-button{
-width:100%;
-padding:15px;
-border:0;
-border-radius:10px;
-background:#fe2c55;
-color:#fff;
-font-size:18px;
-cursor:pointer
+.account-username {
+    color: #777;
+    font-size: 14px;
+    margin-top: 4px;
 }
 
-.overlay{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.5);
-display:none;
-justify-content:center;
-align-items:center;
-z-index:1000
+.verified {
+    width: 17px;
+    height: 17px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #20a8ff;
+    color: white;
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: bold;
 }
 
-.overlay.show{display:flex}
+/* COINS */
 
-.modal{
-background:#fff;
-width:90%;
-max-width:450px;
-border-radius:20px;
-padding:20px;
-box-shadow:0 0 15px rgba(0,0,0,.2)
+.section-title {
+    padding: 8px 16px 12px;
+    font-size: 17px;
+    font-weight: 700;
 }
 
-.modal header{
-display:flex;
-align-items:center;
-justify-content:center;
-position:relative;
-padding-bottom:10px;
-margin-bottom:15px;
-border-bottom:1px solid #eee
+.coin-grid {
+    padding: 0 16px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
 }
 
-.modal h2{
-margin:0;
-font-size:18px
+.coin-card {
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+    padding: 15px 6px;
+    text-align: center;
+    background: #fff;
+    cursor: pointer;
+    transition: transform .12s, border-color .12s, background .12s;
 }
 
-.back-btn{
-position:absolute;
-left:0;
-background:none;
-border:0;
-font-size:22px;
-cursor:pointer
+.coin-card:active {
+    transform: scale(.97);
 }
 
-.coin-input-box{
-display:flex;
-align-items:center;
-border:1.5px solid #ddd;
-border-radius:8px;
-padding:10px 15px;
-margin-bottom:6px
+.coin-card.selected {
+    border: 2px solid #111;
+    padding: 14px 5px;
+    background: #fafafa;
 }
 
-.coin-input-box img{
-width:24px;
-height:24px;
-margin-right:8px
+.coin-number {
+    font-size: 17px;
+    font-weight: 700;
 }
 
-.coin-input-box input{
-width:100%;
-border:0;
-outline:0;
-font-size:20px;
-font-weight:bold
+.coin-symbol {
+    font-size: 15px;
+    margin-right: 2px;
 }
 
-.coin-hint{
-font-size:11px;
-color:#999;
-margin:0 0 16px
+.coin-price {
+    margin-top: 7px;
+    font-size: 14px;
+    color: #555;
 }
 
-#usdAmountDisplay{
-font-size:16px;
-margin:0 0 20px
+.custom-card {
+    margin: 15px 16px 0;
+    border: 1px dashed #bbb;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+    font-weight: 600;
 }
 
-.keypad{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:8px;
-margin-bottom:15px
-}
-
-.keypad button{
-padding:12px 0;
-background:#f8f8f8;
-border:1px solid #e8e8e8;
-border-radius:6px;
-font-size:16px;
-cursor:pointer
-}
+/* BOTTOM */
 
-.custom-modal-offer,
-.custom-total-row,
-.total-row{
-display:flex;
-justify-content:space-between;
-padding:12px 0;
-border-top:1px solid #eee
+.bottom-bar {
+    position: fixed;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 450px;
+    padding: 12px 16px;
+    background: rgba(255,255,255,.97);
+    border-top: 1px solid #eee;
+    z-index: 10;
 }
 
-.custom-modal-offer{
-font-size:13px;
-color:#666
+.buy-btn {
+    width: 100%;
+    height: 50px;
+    border: 0;
+    border-radius: 9px;
+    background: #111;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
 }
 
-.custom-total-row{
-font-size:16px;
-font-weight:600
+.buy-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
 }
 
-.recharge-btn,
-.pay-btn,
-.go-back-btn{
-width:100%;
-padding:14px;
-border:0;
-border-radius:9px;
-background:#fe2c55;
-color:#fff;
-font-size:16px;
-font-weight:600;
-cursor:pointer
-}
+/* MODALS */
 
-.order-details{
-border-bottom:1px solid #eee;
-padding-bottom:12px
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.48);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    z-index: 100;
 }
 
-.detail-row{
-display:flex;
-justify-content:space-between;
-margin-bottom:10px;
-font-size:15px
+.modal-overlay.show {
+    display: flex;
 }
 
-.payment-method-section{
-margin-top:15px
+.modal {
+    width: 100%;
+    max-width: 410px;
+    max-height: 90vh;
+    overflow-y: auto;
+    background: #fff;
+    border-radius: 16px;
+    padding: 22px;
+    position: relative;
 }
 
-.payment-method-section h4{
-margin-bottom:12px
+.modal h2 {
+    margin: 0 0 6px;
+    font-size: 20px;
 }
 
-.payment-option{
-display:flex;
-align-items:center;
-border:1px solid #e9ecef;
-border-radius:8px;
-padding:12px 15px;
-margin-bottom:8px;
-cursor:pointer;
-position:relative
+.modal-subtitle {
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 20px;
 }
 
-.payment-option.selected{
-background:#f8f9fa;
-border-color:#007bff
+.close-btn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 38px;
+    height: 38px;
+    border: 0;
+    background: transparent;
+    font-size: 25px;
+    cursor: pointer;
 }
 
-.payment-option .pm-icon{
-margin-right:12px;
-flex-shrink:0
-}
+/* CUSTOM */
 
-.payment-option span{
-font-size:14px
+.custom-value {
+    text-align: center;
+    font-size: 30px;
+    font-weight: 700;
+    margin: 10px 0 5px;
 }
 
-.payment-option .dot{
-display:none
+.custom-price {
+    text-align: center;
+    color: #777;
+    margin-bottom: 18px;
 }
 
-.payment-option.selected .dot{
-display:block;
-position:absolute;
-right:15px;
-width:18px;
-height:18px;
-background:#007bff;
-border-radius:50%
+.keypad {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
 }
 
-.payment-option.selected .dot:after{
-content:"";
-width:8px;
-height:8px;
-background:#fff;
-border-radius:50%;
-position:absolute;
-left:5px;
-top:5px
+.key {
+    height: 48px;
+    border: 1px solid #ddd;
+    border-radius: 9px;
+    background: #f8f8f8;
+    font-size: 18px;
+    cursor: pointer;
 }
 
-.policy-text{
-font-size:12px;
-color:#6c757d;
-text-align:center;
-line-height:1.5
+.custom-confirm {
+    width: 100%;
+    height: 48px;
+    margin-top: 14px;
+    border: 0;
+    border-radius: 9px;
+    background: #111;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
 }
 
-.loader-container{
-background:#fff;
-width:90%;
-max-width:400px;
-border-radius:20px;
-padding:30px;
-text-align:center
-}
+/* PAYMENT */
 
-.tiktok-loader{
-position:relative;
-width:100px;
-height:50px;
-display:flex;
-justify-content:center;
-align-items:center;
-margin:0 auto 20px
+.order-summary {
+    background: #f7f7f7;
+    border-radius: 10px;
+    padding: 14px;
+    margin-bottom: 18px;
 }
 
-.tiktok-loader .dot{
-position:absolute;
-width:50px;
-height:50px;
-border-radius:50%
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 7px 0;
+    font-size: 14px;
 }
 
-.dot.red{
-background:#fe2c55;
-animation:right .7s ease-in-out infinite
+.summary-total {
+    font-weight: 700;
+    font-size: 17px;
+    padding-top: 7px;
+    border-top: 1px solid #ddd;
 }
 
-.dot.cyan{
-background:#00f2ea;
-animation:left .7s ease-in-out infinite
+.payment-title {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 10px;
 }
 
-@keyframes left{
-0%,100%{transform:translateX(0)}
-50%{transform:translateX(-25px) scale(.8)}
+.payment-option {
+    min-height: 56px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    padding: 10px 13px;
+    margin-bottom: 9px;
+    cursor: pointer;
+    gap: 10px;
 }
 
-@keyframes right{
-0%,100%{transform:translateX(0)}
-50%{transform:translateX(25px) scale(.8)}
+.payment-option.selected {
+    border: 2px solid #111;
+    padding: 9px 12px;
 }
 
-#processingMessage{
-font-size:16px;
-color:#555
+.pm-icon {
+    width: 40px;
+    height: 26px;
+    object-fit: contain;
+    border-radius: 4px;
 }
 
-#processingSubMessage{
-font-size:14px;
-color:#777;
-margin-top:4px
+.paypal-icon {
+    width: 40px;
+    height: 26px;
+    object-fit: contain;
 }
 
-#countdownTimer{
-font-size:18px;
-font-weight:bold;
-color:#fe2c55;
-margin-top:8px
+.payment-option .dot {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #aaa;
+    border-radius: 50%;
+    margin-left: auto;
+    position: relative;
 }
 
-.success-container{
-background:#fff;
-width:90%;
-max-width:400px;
-border-radius:12px;
-padding:25px 20px;
-text-align:center
+.payment-option.selected .dot {
+    border-color: #111;
 }
 
-.success-icon{
-width:64px;
-height:64px;
-margin:0 auto 15px;
-border-radius:50%;
-background:#22c55e;
-color:#fff;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:38px;
-font-weight:800
+.payment-option.selected .dot::after {
+    content: "";
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #111;
+    top: 3px;
+    left: 3px;
 }
 
-.success-container h1{
-font-size:20px;
-font-weight:500
+.payment-start {
+    width: 100%;
+    height: 49px;
+    border: 0;
+    border-radius: 9px;
+    background: #111;
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    margin-top: 8px;
+    cursor: pointer;
 }
 
-.success-account-card{
-padding:14px;
-border:1px solid #eee;
-border-radius:12px;
-background:#fafafa;
-text-align:left;
-margin-bottom:20px
-}
+/* LOADER */
 
-.success-account-head{
-display:flex;
-align-items:center;
-gap:12px
+.payment-loader {
+    min-height: 260px;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
-.success-account-avatar{
-width:54px;
-height:54px;
-border-radius:50%;
-object-fit:cover;
-background:#eee;
-flex-shrink:0
+.loader-spinner {
+    width: 48px;
+    height: 48px;
+    border: 4px solid #e5e5e5;
+    border-top-color: #111;
+    border-radius: 50%;
+    animation: spin .8s linear infinite;
 }
 
-.success-account-info{
-flex:1;
-min-width:0
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
 }
 
-.success-account-name{
-font-size:15px;
-font-weight:700;
-white-space:nowrap;
-overflow:hidden;
-text-overflow:ellipsis
+.payment-loading-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 16px;
 }
 
-.success-account-username{
-font-size:12px;
-font-weight:600;
-color:#666;
-margin-top:2px
+.payment-timer {
+    font-size: 38px;
+    font-weight: 700;
+    margin: 18px 0 8px;
+    letter-spacing: 2px;
+    font-variant-numeric: tabular-nums;
 }
 
-.history-list{
-max-height:60vh;
-overflow-y:auto
+.payment-loading-text {
+    font-size: 13px;
+    color: #777;
+    padding: 0 15px;
 }
 
-.history-empty{
-text-align:center;
-color:#aaa;
-padding:40px 0
-}
+/* SUCCESS */
 
-.history-item{
-background:#fafafa;
-border:1px solid #eee;
-border-radius:12px;
-padding:14px;
-margin-bottom:10px
+.success {
+    display: none;
+    text-align: center;
+    padding: 20px 5px;
 }
 
-.history-account-top{
-display:flex;
-align-items:center;
-gap:10px
+.success-icon {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background: #111;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    font-size: 32px;
 }
 
-.history-account-top img{
-width:44px;
-height:44px;
-border-radius:50%;
-object-fit:cover;
-background:#eee;
-flex-shrink:0
+.success h2 {
+    margin-bottom: 8px;
 }
 
-.history-account-info{
-flex:1;
-min-width:0
+.success p {
+    color: #777;
+    font-size: 14px;
+    line-height: 1.5;
 }
 
-.history-account-name{
-font-size:14px;
-font-weight:700;
-white-space:nowrap;
-overflow:hidden;
-text-overflow:ellipsis
+.success-close {
+    margin-top: 18px;
+    width: 100%;
+    height: 48px;
+    border: 0;
+    border-radius: 9px;
+    background: #111;
+    color: #fff;
+    font-weight: 700;
 }
 
-.history-account-username{
-font-size:12px;
-font-weight:600;
-color:#666
-}
+/* HISTORY */
 
-.history-detail-rows{
-margin-top:10px;
-border-top:1px solid #eee;
-padding-top:10px
+.history-list {
+    margin-top: 12px;
 }
 
-.history-detail-row{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:8px;
-font-size:13px
+.history-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
 }
 
-.history-detail-row:last-child{
-margin-bottom:0
+.history-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #eee;
+    flex-shrink: 0;
 }
 
-.history-detail-label{
-color:#888;
-font-weight:600
+.history-info {
+    margin-left: 10px;
+    flex: 1;
 }
 
-.history-detail-value{
-font-weight:700;
-color:#222
+.history-name {
+    font-size: 14px;
+    font-weight: 700;
 }
 
-.history-coins-inline{
-display:flex;
-align-items:center;
-gap:5px
+.history-date {
+    color: #888;
+    font-size: 12px;
+    margin-top: 4px;
 }
 
-.history-coins-inline img{
-width:18px;
-height:18px;
-flex-shrink:0
+.history-coins {
+    text-align: right;
+    font-weight: 700;
+    font-size: 14px;
 }
 
-.history-status-green{
-color:#16a34a;
-font-weight:700
+.history-price {
+    color: #777;
+    font-size: 12px;
+    margin-top: 4px;
 }
-
 
-/* BOUTON PLEIN ÉCRAN */
-
-#fullscreenBtn{
-position:fixed;
-bottom:15px;
-right:15px;
-width:42px;
-height:42px;
-border:none;
-border-radius:50%;
-background:rgba(0,0,0,.65);
-color:white;
-font-size:22px;
-z-index:999999;
-cursor:pointer;
-opacity:.7
-}
+/* FULLSCREEN */
 
-#fullscreenBtn:active{
-transform:scale(.95)
+#fullscreenBtn {
+    position: fixed;
+    right: 14px;
+    bottom: 82px;
+    z-index: 50;
+    width: 44px;
+    height: 44px;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(0,0,0,.82);
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(0,0,0,.2);
 }
 
-:fullscreen #fullscreenBtn{
-display:none
+@media (max-width: 360px) {
+    .coin-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="app">
 
-<header class="main-header">
-
-<button id="homeBackBtn">←</button>
-
-<h1>Acheter des pièces</h1>
-
-<div class="header-menu-wrap">
-
-<button class="header-menu-btn" id="menuBtn">☰</button>
-
-<div class="menu-dropdown" id="menuDropdown">
-
-<button id="menuRiwayat">
-Historique des transactions
-</button>
-
-</div>
-
-</div>
-
+<header class="header">
+    <button class="back-btn" id="backBtn" aria-label="Retour">‹</button>
+    <h1>Acheter des pièces</h1>
+    <button class="menu-btn" id="menuBtn" aria-label="Menu">⋮</button>
 </header>
 
+<div class="search-area">
 
-<div class="content-wrapper">
+    <div class="search-box">
+        <input
+            type="text"
+            id="usernameInput"
+            placeholder="Nom d'utilisateur TikTok"
+            autocomplete="off"
+            spellcheck="false"
+        >
+        <span class="search-icon">⌕</span>
+    </div>
 
-<nav class="top-nav">
-
-<img
-src="https://static.vecteezy.com/system/resources/previews/020/964/382/original/tiktok-circle-icon-for-web-design-free-png.png"
-alt="TikTok">
-
-<div class="top-target-box">
-
-<div class="top-target-input-row">
-
-<input
-id="targetUsernameInput"
-placeholder="Nom d'utilisateur TikTok"
-autocomplete="off"
-spellcheck="false">
-
-<span
-id="topTargetSpinner"
-class="top-target-spinner">
-</span>
+    <div id="searchMessage" class="search-message"></div>
 
 </div>
 
-<div
-id="targetStatus"
-class="top-target-status">
-</div>
+<div id="accountCard" class="account-card">
+
+    <img
+        id="accountAvatar"
+        class="avatar"
+        alt="Photo de profil"
+    >
+
+    <div class="account-info">
+
+        <div class="account-name">
+
+            <span id="accountName"></span>
+
+            <span
+                id="verifiedBadge"
+                class="verified"
+                style="display:none;"
+            >✓</span>
+
+        </div>
+
+        <div
+            id="accountUsername"
+            class="account-username"
+        ></div>
+
+    </div>
 
 </div>
 
-</nav>
-
-
-<div id="targetCard" class="target-card">
-
-<div class="target-card-top">
-
-<img
-id="targetAvatar"
-class="target-avatar"
-alt="Photo de profil">
-
-<div class="target-info">
-
-<div
-id="targetName"
-class="target-name">
--
+<div class="section-title">
+    Choisir le nombre de pièces
 </div>
 
-<div
-id="targetUsername"
-class="target-username">
--
-</div>
+<div class="coin-grid" id="coinGrid">
 
-</div>
+    <div class="coin-card" data-coins="30" data-price="0.29">
+        <div class="coin-number">🪙 30</div>
+        <div class="coin-price">0,29 €</div>
+    </div>
 
-</div>
+    <div class="coin-card" data-coins="350" data-price="4.99">
+        <div class="coin-number">🪙 350</div>
+        <div class="coin-price">4,99 €</div>
+    </div>
 
-</div>
+    <div class="coin-card" data-coins="700" data-price="9.99">
+        <div class="coin-number">🪙 700</div>
+        <div class="coin-price">9,99 €</div>
+    </div>
 
+    <div class="coin-card" data-coins="1400" data-price="19.99">
+        <div class="coin-number">🪙 1 400</div>
+        <div class="coin-price">19,99 €</div>
+    </div>
 
-<div class="recharge-section">
+    <div class="coin-card" data-coins="3500" data-price="49.99">
+        <div class="coin-number">🪙 3 500</div>
+        <div class="coin-price">49,99 €</div>
+    </div>
 
-<h2>Recharger</h2>
+    <div class="coin-card" data-coins="7000" data-price="99.99">
+        <div class="coin-number">🪙 7 000</div>
+        <div class="coin-price">99,99 €</div>
+    </div>
 
-<p>
-Économisez environ 25 % grâce à des frais de service tiers réduits.
-</p>
+    <div class="coin-card" data-coins="17500" data-price="249.99">
+        <div class="coin-number">🪙 17 500</div>
+        <div class="coin-price">249,99 €</div>
+    </div>
 
-<div class="coin-options">
-
-<button class="coin-option" data-coins="30" data-price="0.29">
-<div class="top-row">
-<img src="https://z-cdn-media.chatglm.cn/files/a60c8806-a57b-4962-b2e7-cce2b7585009.png?auth_key=1888338157-fcd059f95b9543a4b5dd243f2bc86ff7-0-701204ef23f0861ef6bb8e4d6fa33d5a">
-<span>30</span>
-</div>
-<p>0,29 €</p>
-</button>
-
-<button class="coin-option" data-coins="350" data-price="4.99">
-<div class="top-row">
-<img src="https://z-cdn-media.chatglm.cn/files/a60c8806-a57b-4962-b2e7-cce2b7585009.png?auth_key=1888338157-fcd059f95b9543a4b5dd243f2bc86ff7-0-701204ef23f0861ef6bb8e4d6fa33d5a">
-<span>350</span>
-</div>
-<p>4,99 €</p>
-</button>
-
-<button class="coin-option" data-coins="700" data-price="9.99">
-<div class="top-row">
-<img src="https://z-cdn-media.chatglm.cn/files/a60c8806-a57b-4962-b2e7-cce2b7585009.png?auth_key=1888338157-fcd059f95b9543a4b5dd243f2bc86ff7-0-701204ef23f0861ef6bb8e4d6fa33d5a">
-<span>700</span>
-</div>
-<p>9,99 €</p>
-</button>
-
-<button class="coin-option" data-coins="1400" data-price="19.99">
-<div class="top-row">
-<img src="https://z-cdn-media.chatglm.cn/files/a60c8806-a57b-4962-b2e7-cce2b7585009.png?auth_key=1888338157-fcd059f95b9543a4b5dd243f2bc86ff7-0-701204ef23f0861ef6bb8e4d6fa33d5a">
-<span>1 400</span>
-</div>
-<p>19,99 €</p>
-</button>
-
-<button class="coin-option" data-coins="3500" data-price="49.99">
-<div class="top-row">
-<img src="https://z-cdn-media.chatglm.cn/files/a60c8806-a57b-4962-b2e7-cce2b7585009.png?auth_key=1888338157-fcd059f95b9543a4b5dd243f2bc86ff7-0-701204ef23f0861ef6bb8e4d6fa33d5a">
-<span>3 500</span>
-</div>
-<p>49,99 €</p>
-</button>
-
-<button class="coin-option" data-coins="7000" data-price="99.99">
-<div class="top-row">
-<img src="https://z-cdn-media.chatglm.cn/files/a60c8806-a57b-4962-b2e7-cce2b7585009.png?auth_key=1888338157-fcd059f95b9543a4b5dd243f2bc86ff7-0-701204ef23f0861ef6bb8e4d6fa33d5a">
-<span>7 000</span>
-</div>
-<p>99,99 €</p>
-</button>
-
-<button class="coin-option" data-coins="17500" data-price="249.99">
-<div class="top-row">
-<img src="https://z-cdn-media.chatglm.cn/files/a60c8806-a57b-4962-b2e7-cce2b7585009.png?auth_key=1888338157-fcd059f95b9543a4b5dd243f2bc86ff7-0-701204ef23f0861ef6bb8e4d6fa33d5a">
-<span>17 500</span>
-</div>
-<p>249,99 €</p>
-</button>
-
-<button class="coin-option" data-coins="35000" data-price="499.99">
-<div class="top-row">
-<img src="https://z-cdn-media.chatglm.cn/files/a60c8806-a57b-4962-b2e7-cce2b7585009.png?auth_key=1888338157-fcd059f95b9543a4b5dd243f2bc86ff7-0-701204ef23f0861ef6bb8e4d6fa33d5a">
-<span>35 000</span>
-</div>
-<p>499,99 €</p>
-</button>
-
-<button
-class="coin-option custom-btn"
-id="customBtn">
-Personnalisé
-</button>
+    <div class="coin-card" data-coins="35000" data-price="499.99">
+        <div class="coin-number">🪙 35 000</div>
+        <div class="coin-price">499,99 €</div>
+    </div>
 
 </div>
 
-
-<div class="card">
-
-<img
-src="https://z-cdn-media.chatglm.cn/files/1cbc49cf-3814-4d40-bcf0-048fe913535a.png?auth_key=1888344054-97f7da644cba4924814aaf6121462058-0-6fda58532b32a9f84111ab25bc4e39da"
-alt="Invitation">
-
-<div>
-
-<h4>Invitez et gagnez des récompenses</h4>
-
-<p>Découvrez cette nouvelle fonctionnalité !</p>
-
+<div class="custom-card" id="customBtn">
+    ✏️ Montant personnalisé
 </div>
 
 </div>
 
+<div class="bottom-bar">
+    <button class="buy-btn" id="buyBtn" disabled>
+        Continuer
+    </button>
 </div>
 
-</div>
+<button id="fullscreenBtn" aria-label="Plein écran">⛶</button>
 
 
-<footer>
+<!-- CUSTOM MODAL -->
 
-<div class="special-offer">
+<div class="modal-overlay" id="customModal">
 
-<span>Offre spéciale</span>
+    <div class="modal">
 
-<span>Obtenez 5 % de remise &gt;</span>
+        <button class="close-btn" id="customClose">×</button>
 
-</div>
+        <h2>Montant personnalisé</h2>
 
-<button
-class="buy-button"
-id="buyButton">
-Acheter 0,29 €
-</button>
+        <div class="modal-subtitle">
+            Choisissez le nombre de pièces.
+        </div>
 
-</footer>
+        <div id="customValue" class="custom-value">30</div>
 
-</div>
+        <div id="customPrice" class="custom-price">
+            0,43 €
+        </div>
 
+        <div class="keypad">
 
-<!-- MODALE PERSONNALISÉ -->
+            <button class="key" data-key="1">1</button>
+            <button class="key" data-key="2">2</button>
+            <button class="key" data-key="3">3</button>
 
-<div class="overlay" id="customModal">
+            <button class="key" data-key="4">4</button>
+            <button class="key" data-key="5">5</button>
+            <button class="key" data-key="6">6</button>
 
-<div class="modal">
+            <button class="key" data-key="7">7</button>
+            <button class="key" data-key="8">8</button>
+            <button class="key" data-key="9">9</button>
 
-<header>
+            <button class="key" data-key="clear">C</button>
+            <button class="key" data-key="0">0</button>
+            <button class="key" data-key="back">⌫</button>
 
-<button
-class="back-btn"
-id="modalBackBtn">
-←
-</button>
+        </div>
 
-<h2>Personnalisé</h2>
+        <button class="custom-confirm" id="customConfirm">
+            Utiliser ce montant
+        </button>
 
-</header>
-
-<div class="coin-input-box">
-
-<img src="https://z-cdn-media.chatglm.cn/files/a60c8806-a57b-4962-b2e7-cce2b7585009.png?auth_key=1888338157-fcd059f95b9543a4b5dd243f2bc86ff7-0-701204ef23f0861ef6bb8e4d6fa33d5a">
-
-<input
-id="coinAmountInput"
-value="0"
-readonly>
-
-</div>
-
-<p class="coin-hint">
-30 – 2 500 000
-</p>
-
-<p id="usdAmountDisplay">
-0,00 €
-</p>
-
-<div class="keypad" id="keypad">
-
-<button>1</button>
-<button>2</button>
-<button>3</button>
-<button>⌫</button>
-
-<button>4</button>
-<button>5</button>
-<button>6</button>
-<button>000</button>
-
-<button>7</button>
-<button>8</button>
-<button>9</button>
-<button>0</button>
-
-</div>
-
-<div class="custom-modal-offer">
-
-<span>Offre spéciale</span>
-
-<span>Obtenez 5 % de remise &gt;</span>
-
-</div>
-
-<div class="custom-total-row">
-
-<span>Total</span>
-
-<span id="customTotalAmount">
-0,00 €
-</span>
-
-</div>
-
-<button
-class="recharge-btn"
-id="rechargeBtn">
-Recharger
-</button>
-
-</div>
+    </div>
 
 </div>
 
 
-<!-- MODALE COMMANDE -->
+<!-- ORDER MODAL -->
 
-<div class="overlay" id="orderModal">
+<div class="modal-overlay" id="orderModal">
 
-<div class="modal">
+    <div class="modal">
 
-<header>
+        <button class="close-btn" id="orderClose">×</button>
 
-<button
-class="back-btn"
-id="summaryBackBtn">
-←
-</button>
+        <div id="orderContent">
 
-<h2>Commande de pièces</h2>
+            <h2>Commande de pièces</h2>
 
-</header>
+            <div class="modal-subtitle">
+                Vérifiez votre commande avant de continuer.
+            </div>
 
-<div class="order-details">
+            <div class="order-summary">
 
-<div class="detail-row">
+                <div class="summary-row">
+                    <span>Compte</span>
+                    <strong id="summaryUsername">—</strong>
+                </div>
 
-<span>Compte</span>
+                <div class="summary-row">
+                    <span>Pièces</span>
+                    <strong id="summaryCoins">—</strong>
+                </div>
 
-<span id="accountName"></span>
+                <div class="summary-row summary-total">
+                    <span>Total</span>
+                    <strong id="summaryPrice">—</strong>
+                </div>
 
-</div>
+            </div>
 
-<div class="detail-row">
+            <div class="payment-title">
+                Mode de paiement
+            </div>
 
-<span id="summaryCoins"></span>
+            <div class="payment-option selected" data-method="Visa">
 
-<span id="summaryPrice"></span>
+                <img
+                    class="pm-icon"
+                    src="https://img.icons8.com/color/48/000000/visa.png"
+                    width="40"
+                    height="26"
+                    alt="Visa"
+                    style="object-fit:contain;border-radius:4px;"
+                >
 
-</div>
+                <span>•••• 6439</span>
 
-</div>
+                <div class="dot"></div>
 
-<div class="payment-method-section">
+            </div>
 
-<h4>Paiement</h4>
+            <div class="payment-option" data-method="PayPal">
 
-<div
-class="payment-option selected"
-data-method="Visa">
+                <img
+                    class="paypal-icon"
+                    src="https://img.icons8.com/color/48/paypal.png"
+                    width="40"
+                    height="26"
+                    alt="PayPal"
+                >
 
-<img
-class="pm-icon"
-src="https://img.icons8.com/color/48/000000/visa.png"
-width="40"
-height="26"
-alt="Visa"
-style="object-fit:contain;border-radius:4px">
+                <span>PayPal</span>
 
-<span>•••• 6439</span>
+                <div class="dot"></div>
 
-<div class="dot"></div>
+            </div>
 
-</div>
+            <button class="payment-start" id="paymentStart">
+                Payer
+            </button>
 
-<div
-class="payment-option"
-data-method="Paypal">
-
-<img
-class="pm-icon"
-src="https://img.icons8.com/color/48/000000/paypal.png"
-width="40"
-height="26"
-alt="PayPal"
-style="object-fit:contain;border-radius:4px">
-
-<span>PayPal</span>
-
-<div class="dot"></div>
-
-</div>
-
-<p class="policy-text"></p>
-
-</div>
-
-<div class="total-row">
-
-<span>Total</span>
-
-<span id="summaryTotal"></span>
-
-</div>
-
-<button
-class="pay-btn"
-id="payNowBtn">
-Continuer le paiement
-</button>
-
-</div>
-
-</div>
+        </div>
 
 
-<!-- CHARGEMENT -->
+        <!-- PAYMENT LOADER -->
 
-<div class="overlay" id="loaderModal">
+        <div id="paymentLoader" class="payment-loader">
 
-<div class="loader-container">
+            <div class="loader-spinner"></div>
 
-<div class="tiktok-loader">
+            <div class="payment-loading-title">
+                Paiement en cours...
+            </div>
 
-<div class="dot red"></div>
-<div class="dot cyan"></div>
+            <div id="paymentTimer" class="payment-timer">
+                01:00
+            </div>
 
-</div>
+            <div class="payment-loading-text">
+                Veuillez patienter pendant le traitement du paiement.
+            </div>
 
-<p id="processingMessage">
-Traitement du paiement...
-</p>
+        </div>
 
-<p id="processingSubMessage">
-Veuillez patienter.
-</p>
 
-<p id="countdownTimer">
-00:03
-</p>
+        <!-- SUCCESS -->
 
-</div>
+        <div id="paymentSuccess" class="success">
+
+            <div class="success-icon">
+                ✓
+            </div>
+
+            <h2>Paiement réussi</h2>
+
+            <p>
+                Votre commande de pièces a été enregistrée.
+            </p>
+
+            <button class="success-close" id="successClose">
+                Fermer
+            </button>
+
+        </div>
+
+    </div>
 
 </div>
 
 
-<!-- SUCCÈS -->
+<!-- HISTORY -->
 
-<div class="overlay" id="successModal">
+<div class="modal-overlay" id="historyModal">
 
-<div class="success-container">
+    <div class="modal">
 
-<div class="success-icon">
-✓
-</div>
+        <button class="close-btn" id="historyClose">×</button>
 
-<h1>Paiement réussi</h1>
+        <h2>Historique des transactions</h2>
 
-<div class="success-account-card">
+        <div class="modal-subtitle">
+            Vos dernières commandes.
+        </div>
 
-<div class="success-account-head">
+        <div id="historyList" class="history-list"></div>
 
-<img
-id="successAvatar"
-class="success-account-avatar"
-alt="Photo de profil">
-
-<div class="success-account-info">
-
-<div
-id="successAccountName"
-class="success-account-name">
-Invité
-</div>
-
-<div
-id="successAccountUsername"
-class="success-account-username">
-@invité
-</div>
+    </div>
 
 </div>
-
-</div>
-
-</div>
-
-<button
-class="go-back-btn"
-id="goBackBtn">
-SUIVANT
-</button>
-
-</div>
-
-</div>
-
-
-<!-- HISTORIQUE -->
-
-<div class="overlay" id="historyModal">
-
-<div class="modal">
-
-<header>
-
-<button
-class="back-btn"
-id="historyBackBtn">
-←
-</button>
-
-<h2>Historique des transactions</h2>
-
-</header>
-
-<div
-class="history-list"
-id="historyList">
-
-<div class="history-empty">
-Aucune transaction.
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- BOUTON PLEIN ÉCRAN -->
-<!-- Il est volontairement placé AVANT le script -->
-
-<button
-id="fullscreenBtn"
-aria-label="Plein écran">
-⛶
-</button>
 
 
 <script>
 
-/* =========================
-   VARIABLES
-========================= */
-
-const input=
-document.getElementById(
-"targetUsernameInput"
-);
-
-const spinner=
-document.getElementById(
-"topTargetSpinner"
-);
-
-const statusBox=
-document.getElementById(
-"targetStatus"
-);
-
-const card=
-document.getElementById(
-"targetCard"
-);
-
-let detectedTarget=null;
-let targetTimer=null;
-let scanInterval=null;
-let requestId=0;
-
-const cache={};
-const coinsBalance={};
-
-const DEFAULT_AVATAR=
-"https://static.vecteezy.com/system/resources/previews/020/964/382/original/tiktok-circle-icon-for-web-design-free-png.png";
-
-
-/* =========================
-   FORMAT
-========================= */
-
-function formatEUR(v){
-
-return Number(v)
-.toFixed(2)
-.replace(".",",")+" €";
-
-}
-
-function fmtCoins(v){
-
-return Number(v||0)
-.toString()
-.replace(
-/\B(?=(\d{3})+(?!\d))/g,
-" "
-);
-
-}
-
-
-/* =========================
-   PICK
-========================= */
-
-function pick(obj,keys,fb){
-
-for(const key of keys){
-
-let value=obj;
-
-for(const part of key.split(".")){
-
-value=value?.[part];
-
-}
-
-if(
-value!==undefined &&
-value!==null &&
-value!==""
-){
-
-return value;
-
-}
-
-}
-
-return fb;
-
-}
-
-
-/* =========================
-   BADGE
-========================= */
-
-function badgeSVG(size){
-
-return `
-<span class="tiktok-verified-badge">
-
-<svg
-width="${size}"
-height="${size}"
-viewBox="0 0 24 24">
-
-<circle
-cx="12"
-cy="12"
-r="10"
-fill="#20D5EC"/>
-
-<path
-d="M7.5 12.2l3 3 6-6"
-stroke="#fff"
-stroke-width="2"
-fill="none"
-stroke-linecap="round"
-stroke-linejoin="round"/>
-
-</svg>
-
-</span>`;
-
-}
-
-
-/* =========================
-   EXTRAIRE URL AVATAR
-========================= */
-
-function extractAvatar(value){
-
-if(!value)return "";
-
-if(Array.isArray(value)){
-
-for(const item of value){
-
-const result=
-extractAvatar(item);
-
-if(result)return result;
-
-}
-
-return "";
-
-}
-
-if(typeof value==="object"){
-
-const keys=[
-"url",
-"uri",
-"src",
-"url_list",
-"urlList"
-];
-
-for(const key of keys){
-
-if(value[key]){
-
-const result=
-extractAvatar(value[key]);
-
-if(result)return result;
-
-}
-
-}
-
-return "";
-
-}
-
-let url=
-String(value).trim();
-
-if(url.startsWith("//")){
-
-url="https:"+url;
-
-}
-
-if(
-url.startsWith("https://") ||
-url.startsWith("http://")
-){
-
-return url;
-
-}
-
-return "";
-
-}
-
-
-/* =========================
-   EXTRAIRE UTILISATEUR
-========================= */
-
-function extractUser(raw){
-
-if(
-!raw ||
-typeof raw!=="object"
-){
-
-throw new Error(
-"Réponse API vide"
-);
-
-}
-
-
-/*
-TikWM utilise normalement :
-
-data
- └── user
-      ├── uniqueId
-      ├── nickname
-      ├── avatarLarger
-      ├── avatarMedium
-      └── avatarThumb
-*/
-
-const root=
-raw.data ||
-raw.result ||
-raw;
-
-
-if(
-root.code!==undefined &&
-Number(root.code)!==0
-){
-
-throw new Error(
-root.msg ||
-"Compte introuvable"
-);
-
-}
-
-
-const info=
-root.userInfo ||
-root.user_info ||
-root;
-
-
-const user=
-info.user ||
-root.user ||
-info;
-
-
-const username=
-String(
-pick(
-user,
-[
-"uniqueId",
-"unique_id",
-"uniqueID",
-"username"
-],
-""
-)
-)
-.replace(/^@/,"")
-.trim();
-
-
-if(!username){
-
-throw new Error(
-"Nom d'utilisateur introuvable"
-);
-
-}
-
-
-const name=
-String(
-pick(
-user,
-[
-"nickname",
-"name",
-"display_name",
-"displayName"
-],
-username
-)
-);
-
-
-let avatar="";
-
-
-const avatarValues=[
-
-user.avatarLarger,
-user.avatar_larger,
-
-user.avatarMedium,
-user.avatar_medium,
-
-user.avatarThumb,
-user.avatar_thumb,
-
-user.avatar,
-user.avatar_url,
-user.avatarUrl,
-
-info.avatarLarger,
-info.avatar_larger,
-
-info.avatarMedium,
-info.avatar_medium,
-
-info.avatarThumb,
-info.avatar_thumb,
-
-info.avatar,
-info.avatar_url,
-
-root.avatarLarger,
-root.avatar_larger,
-
-root.avatarMedium,
-root.avatar_medium,
-
-root.avatarThumb,
-root.avatar_thumb,
-
-root.avatar,
-root.avatar_url
-
-];
-
-
-for(
-const value of avatarValues
-){
-
-const result=
-extractAvatar(value);
-
-if(result){
-
-avatar=result;
-break;
-
-}
-
-}
-
-
-const verified=
-Boolean(
-pick(
-user,
-[
-"verified",
-"isVerified",
-"is_verified"
-],
-false
-)
-);
-
-
-return{
-
-username:username,
-
-name:name||username,
-
-avatar:avatar,
-
-verified:verified
-
-};
-
-}
-
-
-/* =========================
-   REQUÊTE TIKWM
-========================= */
-
-async function requestTikwmUser(username){
-
-/*
-TikWM accepte user/info avec
-unique_id. On utilise GET en
-premier, puis POST en secours.
-*/
-
-try{
-
-const url=
-"https://www.tikwm.com/api/user/info?unique_id="+
-encodeURIComponent(username);
-
-const response=
-await fetch(
-url,
-{
-method:"GET",
-cache:"no-store",
-headers:{
-"Accept":
-"application/json"
-}
-}
-);
-
-if(!response.ok){
-
-throw new Error(
-"HTTP "+response.status
-);
-
-}
-
-const json=
-await response.json();
-
-return extractUser(json);
-
-}
-
-catch(error){
-
-console.log(
-"TikWM GET :",
-error
-);
-
-}
-
-
-/* SECOURS POST */
-
-try{
-
-const response=
-await fetch(
-"https://www.tikwm.com/api/user/info/",
-{
-method:"POST",
-cache:"no-store",
-
-headers:{
-"Content-Type":
-"application/x-www-form-urlencoded;charset=UTF-8",
-
-"Accept":
-"application/json"
-},
-
-body:
-"unique_id="+
-encodeURIComponent(username)
-
-}
-);
-
-if(!response.ok){
-
-throw new Error(
-"HTTP "+response.status
-);
-
-}
-
-const json=
-await response.json();
-
-return extractUser(json);
-
-}
-
-catch(error){
-
-console.log(
-"TikWM POST :",
-error
-);
-
-}
-
-throw new Error(
-"Impossible de récupérer ce compte"
-);
-
-}
-
-
-/* =========================
-   NORMALISATION
-========================= */
-
-function normalize(value){
-
-let s=
-String(value||"").trim();
-
-s=s.replace(
-/^https?:\/\/(?:www\.|m\.)?tiktok\.com\//i,
-""
-);
-
-s=s.replace(/^@/,"");
-
-return s
-.split(/[/?#]/)[0]
-.trim();
-
-}
-
-
-/* =========================
-   STOP SCAN
-========================= */
-
-function stopScanText(){
-
-if(scanInterval){
-
-clearInterval(
-scanInterval
-);
-
-scanInterval=null;
-
-}
-
-statusBox.classList.remove(
-"scanning"
-);
-
-}
-
-
-/* =========================
-   AFFICHER COMPTE
-========================= */
-
-function renderTarget(data){
-
-detectedTarget=data;
-
-stopScanText();
+/* VARIABLES */
 
-const avatar=
-document.getElementById(
-"targetAvatar"
-);
-
-
-avatar.onerror=function(){
-
-this.onerror=null;
-
-this.src=
-DEFAULT_AVATAR;
-
-};
-
-
-avatar.src=
-data.avatar ||
-DEFAULT_AVATAR;
-
-
-document.getElementById(
-"targetName"
-).innerHTML=
-
-(data.name||data.username)+
-(
-data.verified
-?badgeSVG(16)
-:""
-);
-
-
-document.getElementById(
-"targetUsername"
-).textContent=
-"@"+data.username;
-
-
-if(
-coinsBalance[data.username]===undefined
-){
-
-coinsBalance[data.username]=
-generateDemoCoins(
-data.username
-);
-
-}
-
-
-card.classList.add(
-"show"
-);
-
-statusBox.style.display=
-"none";
-
-spinner.classList.remove(
-"show"
-);
-
-}
-
-
-/* =========================
-   RESET
-========================= */
-
-function resetTarget(){
-
-detectedTarget=null;
-
-input.value="";
-
-card.classList.remove(
-"show"
-);
-
-stopScanText();
-
-spinner.classList.remove(
-"show"
-);
-
-statusBox.textContent="";
-
-statusBox.style.display=
-"none";
-
-statusBox.style.color=
-"#888";
-
-document.getElementById(
-"targetName"
-).textContent="-";
-
-document.getElementById(
-"targetUsername"
-).textContent="-";
-
-document.getElementById(
-"targetAvatar"
-).src=
-DEFAULT_AVATAR;
-
-}
-
-
-/* =========================
-   RECHERCHE
-========================= */
-
-async function fetchTarget(username){
-
-const id=++requestId;
-
-
-if(cache[username]){
-
-renderTarget(
-cache[username]
-);
-
-return;
-
-}
-
-
-const steps=[
-"Recherche du compte...",
-"Vérification...",
-"Compte trouvé !"
-];
-
-let step=0;
-
-statusBox.classList.add(
-"scanning"
-);
-
-statusBox.style.color=
-"#fe2c55";
-
-statusBox.textContent=
-steps[0];
-
-statusBox.style.display=
-"block";
-
-
-scanInterval=
-setInterval(
-()=>{
-
-step++;
-
-if(step<steps.length){
-
-statusBox.textContent=
-steps[step];
-
-}
-
-},
-500
-);
-
-
-try{
-
-const data=
-await requestTikwmUser(
-username
-);
-
-
-if(id!==requestId){
-
-stopScanText();
-
-return;
-
-}
-
-
-cache[username]=data;
-
-renderTarget(data);
-
-}
-
-catch(error){
-
-console.log(error);
-
-if(id!==requestId){
-
-stopScanText();
-
-return;
-
-}
-
-stopScanText();
-
-spinner.classList.remove(
-"show"
-);
-
-card.classList.remove(
-"show"
-);
-
-statusBox.style.color=
-"#d93025";
-
-statusBox.textContent=
-"Compte introuvable ou service indisponible.";
-
-statusBox.style.display=
-"block";
-
-}
-
-}
-
-
-/* =========================
-   INPUT
-========================= */
-
-function detectTarget(){
-
-const username=
-normalize(input.value);
-
-
-if(!username){
+let selectedCoins = null;
+let selectedPrice = null;
+let selectedMethod = "Visa";
 
-resetTarget();
+let customCoins = 30;
 
-return;
+let paymentCountdown = null;
 
-}
-
-
-clearTimeout(
-targetTimer
-);
+let transactionHistory = [];
 
-spinner.classList.add(
-"show"
-);
 
-statusBox.style.display=
-"block";
+/* HELPERS */
 
-statusBox.style.color=
-"#888";
+function normalize(username) {
 
-card.classList.remove(
-"show"
-);
+    let value = String(username || "").trim();
 
-stopScanText();
+    value = value.replace(/^@/, "");
 
+    value = value.replace(
+        /^https?:\/\/(www\.)?tiktok\.com\/@?/i,
+        ""
+    );
 
-targetTimer=
-setTimeout(
-()=>{
-fetchTarget(username);
-},
-500
-);
+    value = value.split("?")[0];
+    value = value.split("/")[0];
 
+    return value.trim();
 }
 
 
-input.addEventListener(
-"input",
-detectTarget
-);
+function formatNumber(number) {
 
-input.addEventListener(
-"paste",
-()=>{
-setTimeout(
-detectTarget,
-50
-);
+    return Number(number || 0)
+        .toLocaleString("fr-FR");
 }
-);
-
-
-/* =========================
-   PIÈCES
-========================= */
-
-const coinOpts=
-document.querySelectorAll(
-".coin-option:not(.custom-btn)"
-);
 
-let selCoins=30;
-let selPrice=.29;
 
+function formatPrice(price) {
 
-document
-.querySelector(
-'.coin-option[data-coins="30"]'
-)
-.classList.add(
-"selected"
-);
-
-
-function setBuyText(){
-
-document.getElementById(
-"buyButton"
-).textContent=
-"Acheter "+
-formatEUR(selPrice);
-
+    return Number(price || 0)
+        .toFixed(2)
+        .replace(".", ",") + " €";
 }
-
-
-coinOpts.forEach(
-option=>{
-
-option.addEventListener(
-"click",
-()=>{
-
-coinOpts.forEach(
-x=>
-x.classList.remove(
-"selected"
-)
-);
-
-option.classList.add(
-"selected"
-);
-
-selCoins=
-Number(
-option.dataset.coins
-);
 
-selPrice=
-Number(
-option.dataset.price
-);
 
-setBuyText();
-
-}
-);
+function escapeHTML(value) {
 
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 }
-);
-
-
-/* =========================
-   PERSONNALISÉ
-========================= */
-
-const coinInput=
-document.getElementById(
-"coinAmountInput"
-);
-
-const usdDisp=
-document.getElementById(
-"usdAmountDisplay"
-);
-
-const totalDisp=
-document.getElementById(
-"customTotalAmount"
-);
-
-let customRaw="";
 
 
-function updateCustom(){
+/* AVATAR */
 
-let coins=
-Number(customRaw)||0;
+function extractAvatar(value) {
 
-if(coins>2500000){
+    if (!value) {
+        return "";
+    }
 
-coins=2500000;
+    if (typeof value === "string") {
+        return value.trim();
+    }
 
-customRaw=
-"2500000";
+    if (Array.isArray(value)) {
 
-}
-
-coinInput.value=
-coins
-?fmtCoins(coins)
-:"0";
-
-const price=
-coins*.01426;
-
-usdDisp.textContent=
-formatEUR(price);
-
-totalDisp.textContent=
-formatEUR(price);
-
-}
+        for (const item of value) {
 
+            const result =
+                extractAvatar(item);
 
-document.getElementById(
-"customBtn"
-).addEventListener(
-"click",
-()=>{
+            if (result) {
+                return result;
+            }
+        }
 
-customRaw="";
+        return "";
+    }
 
-updateCustom();
+    if (typeof value === "object") {
 
-document.getElementById(
-"customModal"
-).classList.add(
-"show"
-);
-
-}
-);
+        const keys = [
+            "url",
+            "uri",
+            "src",
+            "url_list",
+            "urlList"
+        ];
 
+        for (const key of keys) {
 
-document.getElementById(
-"modalBackBtn"
-).addEventListener(
-"click",
-()=>{
+            const result =
+                extractAvatar(value[key]);
 
-document.getElementById(
-"customModal"
-).classList.remove(
-"show"
-);
+            if (result) {
+                return result;
+            }
+        }
+    }
 
+    return "";
 }
-);
-
-
-document.getElementById(
-"keypad"
-).addEventListener(
-"click",
-event=>{
 
-const button=
-event.target.closest(
-"button"
-);
 
-if(!button)return;
+/* TIKWM */
 
-const value=
-button.textContent.trim();
+async function requestTikwmUser(username) {
 
+    const endpoints = [
 
-if(value==="⌫"){
+        "https://www.tikwm.com/api/user/info?unique_id=" +
+        encodeURIComponent(username),
 
-customRaw=
-customRaw.slice(0,-1);
-
-}
+        "https://tikwm.com/api/user/info?unique_id=" +
+        encodeURIComponent(username)
 
-else if(value==="000"){
+    ];
 
-if(customRaw){
+    let lastError = null;
 
-customRaw+="000";
+    for (const url of endpoints) {
 
-}
+        try {
 
-}
+            const response =
+                await fetch(url, {
+                    method: "GET",
+                    cache: "no-store",
+                    headers: {
+                        "Accept": "application/json"
+                    }
+                });
 
-else if(/^\d$/.test(value)){
+            if (!response.ok) {
+                throw new Error(
+                    "HTTP " + response.status
+                );
+            }
 
-if(customRaw.length<9){
+            const json =
+                await response.json();
 
-customRaw+=value;
+            if (
+                json &&
+                typeof json.code !== "undefined" &&
+                Number(json.code) !== 0
+            ) {
 
-}
+                throw new Error(
+                    json.msg ||
+                    json.message ||
+                    "Utilisateur introuvable"
+                );
+            }
 
-}
+            return json;
 
+        } catch (error) {
 
-updateCustom();
+            lastError = error;
+        }
+    }
 
+    throw lastError ||
+        new Error(
+            "Impossible de récupérer le profil."
+        );
 }
-);
-
-
-document.getElementById(
-"rechargeBtn"
-).addEventListener(
-"click",
-()=>{
 
-const coins=
-Number(customRaw)||0;
-
-
-if(coins<30){
-
-alert(
-"Le minimum est de 30 pièces."
-);
 
-return;
+/* EXTRACT USER */
 
-}
+function extractUser(raw, requestedUsername) {
 
+    if (!raw) {
+        return null;
+    }
 
-if(coins>2500000){
+    const root =
+        raw.data ?? raw;
 
-alert(
-"Le maximum est de 2 500 000 pièces."
-);
+    const user =
+        root?.user ??
+        root?.userInfo?.user ??
+        root?.userInfo ??
+        root;
 
-return;
+    if (!user ||
+        typeof user !== "object") {
 
-}
+        return null;
+    }
 
+    const avatarKeys = [
 
-selCoins=coins;
+        "avatarLarger",
+        "avatar_larger",
+        "avatar_large_url",
 
-selPrice=
-Math.round(
-coins*.01426*100
-)/100;
+        "avatarMedium",
+        "avatar_medium",
 
+        "avatarThumb",
+        "avatar_thumb",
 
-coinOpts.forEach(
-x=>
-x.classList.remove(
-"selected"
-)
-);
+        "avatar_url",
+        "avatar_url_100",
 
-setBuyText();
+        "avatar"
+    ];
 
+    let avatar = "";
 
-document.getElementById(
-"customModal"
-).classList.remove(
-"show"
-);
+    for (const key of avatarKeys) {
 
-}
-);
+        avatar =
+            extractAvatar(user[key]);
 
+        if (avatar) {
+            break;
+        }
+    }
 
-/* =========================
-   COMMANDE
-========================= */
+    const uniqueId =
+        user.uniqueId ||
+        user.unique_id ||
+        user.username ||
+        requestedUsername;
 
-const orderModal=
-document.getElementById(
-"orderModal"
-);
+    const nickname =
+        user.nickname ||
+        user.displayName ||
+        user.display_name ||
+        uniqueId;
 
+    const verified =
+        user.verified === true ||
+        user.isVerified === true ||
+        user.is_verified === true;
 
-document.getElementById(
-"buyButton"
-).addEventListener(
-"click",
-()=>{
+    return {
 
-if(!detectedTarget){
+        username: uniqueId,
 
-alert(
-"Veuillez d'abord saisir le nom d'utilisateur cible !"
-);
+        name: nickname,
 
-return;
+        avatar: avatar,
 
+        verified: verified
+    };
 }
 
 
-document.getElementById(
-"accountName"
-).textContent=
-"@"+
-detectedTarget.username;
+/* RENDER ACCOUNT */
 
+function renderTarget(data) {
 
-document.getElementById(
-"summaryCoins"
-).textContent=
-fmtCoins(selCoins)+
-" pièces";
+    const card =
+        document.getElementById("accountCard");
 
+    const avatar =
+        document.getElementById("accountAvatar");
 
-document.getElementById(
-"summaryPrice"
-).textContent=
-formatEUR(selPrice);
+    const name =
+        document.getElementById("accountName");
 
+    const username =
+        document.getElementById("accountUsername");
 
-document.getElementById(
-"summaryTotal"
-).textContent=
-formatEUR(selPrice);
+    const badge =
+        document.getElementById("verifiedBadge");
 
-
-orderModal.classList.add(
-"show"
-);
+    name.textContent =
+        data.name ||
+        data.username ||
+        "";
 
-}
-);
+    username.textContent =
+        data.username
+            ? "@" + data.username
+            : "";
 
+    badge.style.display =
+        data.verified
+            ? "inline-flex"
+            : "none";
 
-document.getElementById(
-"summaryBackBtn"
-).addEventListener(
-"click",
-()=>{
+    avatar.onerror = function() {
 
-orderModal.classList.remove(
-"show"
-);
+        avatar.onerror = null;
 
-}
-);
+        avatar.removeAttribute("src");
+    };
 
+    if (data.avatar) {
 
-/* =========================
-   PAIEMENT
-========================= */
-
-document.querySelectorAll(
-".payment-option"
-).forEach(
-option=>{
-
-option.addEventListener(
-"click",
-()=>{
-
-document
-.querySelectorAll(
-".payment-option"
-)
-.forEach(
-x=>
-x.classList.remove(
-"selected"
-)
-);
+        avatar.src = data.avatar;
 
-option.classList.add(
-"selected"
-);
+    } else {
 
-}
-);
+        avatar.removeAttribute("src");
+    }
 
+    card.classList.add("show");
 }
-);
-
-
-/* =========================
-   PAIEMENT SIMULÉ
-========================= */
-
-document.getElementById(
-"payNowBtn"
-).addEventListener(
-"click",
-()=>{
-
-orderModal.classList.remove(
-"show"
-);
-
-const loader=
-document.getElementById(
-"loaderModal"
-);
-
-loader.classList.add(
-"show"
-);
-
-let seconds=3;
-
-document.getElementById(
-"countdownTimer"
-).textContent=
-"00:03";
 
 
-const timer=
-setInterval(
-()=>{
+/* SEARCH */
 
-seconds--;
+const usernameInput =
+    document.getElementById(
+        "usernameInput"
+    );
 
-document.getElementById(
-"countdownTimer"
-).textContent=
-seconds>0
-?"00:0"+seconds
-:"00:00";
+const searchMessage =
+    document.getElementById(
+        "searchMessage"
+    );
 
+let searchTimeout = null;
 
-if(seconds<=0){
+usernameInput.addEventListener(
+    "input",
+    function() {
 
-clearInterval(timer);
+        clearTimeout(searchTimeout);
 
-loader.classList.remove(
-"show"
-);
-
-showPaymentSuccess();
-
-}
+        const username =
+            normalize(this.value);
 
-},
-1000
-);
+        if (!username) {
 
-}
-);
+            document
+                .getElementById("accountCard")
+                .classList.remove("show");
 
+            searchMessage.textContent = "";
 
-/* =========================
-   SUCCÈS
-========================= */
+            return;
+        }
 
-function showPaymentSuccess(){
+        searchMessage.textContent =
+            "Recherche du profil...";
 
-if(!detectedTarget)return;
+        searchTimeout = setTimeout(
+            async function() {
 
+                try {
 
-const avatar=
-document.getElementById(
-"successAvatar"
-);
+                    const raw =
+                        await requestTikwmUser(
+                            username
+                        );
 
-avatar.onerror=function(){
+                    const data =
+                        extractUser(
+                            raw,
+                            username
+                        );
 
-this.onerror=null;
+                    if (!data) {
+                        throw new Error(
+                            "Profil introuvable"
+                        );
+                    }
 
-this.src=
-DEFAULT_AVATAR;
+                    renderTarget(data);
 
-};
+                    searchMessage.textContent = "";
 
-avatar.src=
-detectedTarget.avatar||
-DEFAULT_AVATAR;
+                } catch (error) {
 
+                    document
+                        .getElementById("accountCard")
+                        .classList.remove("show");
 
-document.getElementById(
-"successAccountName"
-).innerHTML=
+                    searchMessage.textContent =
+                        "Profil introuvable ou temporairement indisponible.";
+                }
 
-(detectedTarget.name||
-detectedTarget.username)+
-(
-detectedTarget.verified
-?badgeSVG(15)
-:""
+            },
+            500
+        );
+    }
 );
-
-
-document.getElementById(
-"successAccountUsername"
-).textContent=
-"@"+
-detectedTarget.username;
-
-
-const username=
-detectedTarget.username;
 
 
-coinsBalance[username]=
-(coinsBalance[username]||0)+
-selCoins;
+/* COINS */
 
+const coinCards =
+    document.querySelectorAll(
+        ".coin-card"
+    );
 
-transactionHistory.unshift({
+const buyBtn =
+    document.getElementById(
+        "buyBtn"
+    );
 
-username:
-detectedTarget.username,
+coinCards.forEach(card => {
 
-name:
-detectedTarget.name,
+    card.addEventListener(
+        "click",
+        function() {
 
-avatar:
-detectedTarget.avatar,
+            coinCards.forEach(c =>
+                c.classList.remove(
+                    "selected"
+                )
+            );
 
-verified:
-detectedTarget.verified,
+            this.classList.add(
+                "selected"
+            );
 
-coins:
-coinsBalance[username],
+            selectedCoins =
+                Number(
+                    this.dataset.coins
+                );
 
-price:
-selPrice
+            selectedPrice =
+                Number(
+                    this.dataset.price
+                );
 
+            buyBtn.disabled = false;
+        }
+    );
 });
 
 
-if(
-transactionHistory.length>50
-){
+/* CUSTOM */
 
-transactionHistory.pop();
+const customModal =
+    document.getElementById(
+        "customModal"
+    );
 
+const customValue =
+    document.getElementById(
+        "customValue"
+    );
+
+const customPrice =
+    document.getElementById(
+        "customPrice"
+    );
+
+function updateCustomDisplay() {
+
+    if (customCoins < 30) {
+        customCoins = 30;
+    }
+
+    if (customCoins > 2500000) {
+        customCoins = 2500000;
+    }
+
+    customValue.textContent =
+        formatNumber(customCoins);
+
+    const price =
+        customCoins * 0.01426;
+
+    customPrice.textContent =
+        formatPrice(price);
 }
 
 
-document.getElementById(
-"successModal"
-).classList.add(
-"show"
+document
+    .getElementById("customBtn")
+    .addEventListener(
+        "click",
+        function() {
+
+            customCoins = 30;
+
+            updateCustomDisplay();
+
+            customModal.classList.add(
+                "show"
+            );
+        }
+    );
+
+
+document
+    .getElementById("customClose")
+    .addEventListener(
+        "click",
+        function() {
+
+            customModal.classList.remove(
+                "show"
+            );
+        }
+    );
+
+
+document
+    .querySelectorAll(".key")
+    .forEach(key => {
+
+        key.addEventListener(
+            "click",
+            function() {
+
+                const value =
+                    this.dataset.key;
+
+                if (value === "clear") {
+
+                    customCoins = 0;
+
+                } else if (
+                    value === "back"
+                ) {
+
+                    customCoins =
+                        Number(
+                            String(
+                                customCoins
+                            ).slice(0, -1)
+                        ) || 0;
+
+                } else {
+
+                    let current =
+                        String(
+                            customCoins
+                        );
+
+                    if (current === "0") {
+                        current = "";
+                    }
+
+                    customCoins =
+                        Number(
+                            current + value
+                        );
+                }
+
+                updateCustomDisplay();
+            }
+        );
+    });
+
+
+document
+    .getElementById("customConfirm")
+    .addEventListener(
+        "click",
+        function() {
+
+            if (customCoins < 30) {
+                customCoins = 30;
+            }
+
+            if (customCoins > 2500000) {
+                customCoins = 2500000;
+            }
+
+            selectedCoins =
+                customCoins;
+
+            selectedPrice =
+                customCoins * 0.01426;
+
+            coinCards.forEach(c =>
+                c.classList.remove(
+                    "selected"
+                )
+            );
+
+            buyBtn.disabled = false;
+
+            customModal.classList.remove(
+                "show"
+            );
+        }
+    );
+
+
+/* ORDER */
+
+const orderModal =
+    document.getElementById(
+        "orderModal"
+    );
+
+const summaryUsername =
+    document.getElementById(
+        "summaryUsername"
+    );
+
+const summaryCoins =
+    document.getElementById(
+        "summaryCoins"
+    );
+
+const summaryPrice =
+    document.getElementById(
+        "summaryPrice"
+    );
+
+
+buyBtn.addEventListener(
+    "click",
+    function() {
+
+        if (
+            !selectedCoins ||
+            !selectedPrice
+        ) {
+            return;
+        }
+
+        const username =
+            normalize(
+                usernameInput.value
+            );
+
+        summaryUsername.textContent =
+            username
+                ? "@" + username
+                : "Compte TikTok";
+
+        summaryCoins.textContent =
+            formatNumber(
+                selectedCoins
+            );
+
+        summaryPrice.textContent =
+            formatPrice(
+                selectedPrice
+            );
+
+        resetPaymentWindow();
+
+        orderModal.classList.add(
+            "show"
+        );
+    }
 );
 
+
+document
+    .getElementById("orderClose")
+    .addEventListener(
+        "click",
+        function() {
+
+            stopPaymentTimer();
+
+            orderModal.classList.remove(
+                "show"
+            );
+        }
+    );
+
+
+/* PAYMENT METHOD */
+
+document
+    .querySelectorAll(
+        ".payment-option"
+    )
+    .forEach(option => {
+
+        option.addEventListener(
+            "click",
+            function() {
+
+                document
+                    .querySelectorAll(
+                        ".payment-option"
+                    )
+                    .forEach(item =>
+                        item.classList.remove(
+                            "selected"
+                        )
+                    );
+
+                this.classList.add(
+                    "selected"
+                );
+
+                selectedMethod =
+                    this.dataset.method;
+            }
+        );
+    });
+
+
+/* PAYMENT TIMER */
+
+function stopPaymentTimer() {
+
+    if (paymentCountdown) {
+
+        clearInterval(
+            paymentCountdown
+        );
+
+        paymentCountdown = null;
+    }
 }
 
 
-document.getElementById(
-"goBackBtn"
-).addEventListener(
-"click",
-()=>{
+/*
+    IMPORTANT :
 
-document.getElementById(
-"successModal"
-).classList.remove(
-"show"
-);
+    Le compteur affiche 01:00,
+    mais la simulation est validée
+    après seulement 5 secondes.
+*/
 
-resetTarget();
+function startPaymentTimer() {
 
-}
-);
+    const timer =
+        document.getElementById(
+            "paymentTimer"
+        );
 
+    const loader =
+        document.getElementById(
+            "paymentLoader"
+        );
 
-/* =========================
-   HISTORIQUE
-========================= */
+    if (!timer || !loader) {
+        return;
+    }
 
-let transactionHistory=[];
+    stopPaymentTimer();
 
+    let remaining = 60;
 
-const coinImg=
-"https://z-cdn-media.chatglm.cn/files/a60c8806-a57b-4962-b2e7-cce2b7585009.png?auth_key=1888338157-fcd059f95b9543a4b5dd243f2bc86ff7-0-701204ef23f0861ef6bb8e4d6fa33d5a";
+    timer.textContent = "01:00";
 
+    loader.style.display = "flex";
 
-function openHistory(){
+    paymentCountdown =
+        setInterval(
+            function() {
 
-const list=
-document.getElementById(
-"historyList"
-);
+                remaining--;
 
-list.innerHTML="";
+                const minutes =
+                    Math.floor(
+                        remaining / 60
+                    );
 
+                const seconds =
+                    remaining % 60;
 
-if(!transactionHistory.length){
+                timer.textContent =
+                    String(minutes)
+                        .padStart(2, "0") +
+                    ":" +
+                    String(seconds)
+                        .padStart(2, "0");
 
-list.innerHTML=
-'<div class="history-empty">Aucune transaction.</div>';
+                /*
+                    À 55 secondes restantes,
+                    donc après 5 secondes,
+                    la simulation est validée.
+                */
 
-}
+                if (
+                    remaining === 55
+                ) {
 
-else{
+                    stopPaymentTimer();
 
-transactionHistory.forEach(
-tx=>{
+                    setTimeout(
+                        function() {
 
-const item=
-document.createElement(
-"div"
-);
+                            showPaymentSuccess();
 
-item.className=
-"history-item";
+                        },
+                        300
+                    );
+                }
 
-
-const safeAvatar=
-tx.avatar||
-DEFAULT_AVATAR;
-
-
-item.innerHTML=`
-
-<div class="history-account-top">
-
-<img
-src="${safeAvatar}"
-onerror="this.onerror=null;this.src='${DEFAULT_AVATAR}'">
-
-<div class="history-account-info">
-
-<div class="history-account-name">
-
-${tx.name||tx.username}
-
-${
-tx.verified
-?badgeSVG(14)
-:""
-}
-
-</div>
-
-<div class="history-account-username">
-@${tx.username}
-</div>
-
-</div>
-
-</div>
-
-<div class="history-detail-rows">
-
-<div class="history-detail-row">
-
-<span class="history-detail-label">
-Pièces
-</span>
-
-<span class="history-detail-value">
-
-<span class="history-coins-inline">
-
-<img src="${coinImg}">
-
-${fmtCoins(tx.coins)}
-
-</span>
-
-</span>
-
-</div>
-
-<div class="history-detail-row">
-
-<span class="history-detail-label">
-Prix
-</span>
-
-<span class="history-detail-value">
-${formatEUR(tx.price)}
-</span>
-
-</div>
-
-<div class="history-detail-row">
-
-<span class="history-detail-label">
-Statut
-</span>
-
-<span class="history-status-green">
-Réussi
-</span>
-
-</div>
-
-</div>
-`;
-
-list.appendChild(item);
-
-}
-);
-
+            },
+            1000
+        );
 }
 
 
-document.getElementById(
-"historyModal"
-).classList.add(
-"show"
-);
+/* PAYMENT START */
 
+document
+    .getElementById(
+        "paymentStart"
+    )
+    .addEventListener(
+        "click",
+        function() {
+
+            document
+                .getElementById(
+                    "orderContent"
+                )
+                .style.display =
+                "none";
+
+            document
+                .getElementById(
+                    "paymentSuccess"
+                )
+                .style.display =
+                "none";
+
+            document
+                .getElementById(
+                    "paymentLoader"
+                )
+                .style.display =
+                "flex";
+
+            startPaymentTimer();
+        }
+    );
+
+
+/* RESET */
+
+function resetPaymentWindow() {
+
+    stopPaymentTimer();
+
+    document
+        .getElementById(
+            "orderContent"
+        )
+        .style.display =
+        "block";
+
+    document
+        .getElementById(
+            "paymentLoader"
+        )
+        .style.display =
+        "none";
+
+    document
+        .getElementById(
+            "paymentSuccess"
+        )
+        .style.display =
+        "none";
+
+    document
+        .getElementById(
+            "paymentTimer"
+        )
+        .textContent =
+        "01:00";
 }
 
 
-/* =========================
-   MENU
-========================= */
+/* SUCCESS */
 
-document.getElementById(
-"menuBtn"
-).addEventListener(
-"click",
-event=>{
+function showPaymentSuccess() {
 
-event.stopPropagation();
+    document
+        .getElementById(
+            "paymentLoader"
+        )
+        .style.display =
+        "none";
 
-document.getElementById(
-"menuDropdown"
-).classList.toggle(
-"show"
-);
+    document
+        .getElementById(
+            "paymentSuccess"
+        )
+        .style.display =
+        "block";
 
-}
-);
-
-
-document.addEventListener(
-"click",
-()=>{
-
-document.getElementById(
-"menuDropdown"
-).classList.remove(
-"show"
-);
-
-}
-);
-
-
-document.getElementById(
-"menuRiwayat"
-).addEventListener(
-"click",
-openHistory
-);
-
-
-document.getElementById(
-"historyBackBtn"
-).addEventListener(
-"click",
-()=>{
-
-document.getElementById(
-"historyModal"
-).classList.remove(
-"show"
-);
-
-}
-);
-
-
-document.getElementById(
-"homeBackBtn"
-).addEventListener(
-"click",
-resetTarget
-);
-
-
-/* =========================
-   PLEIN ÉCRAN
-========================= */
-
-const fullscreenBtn=
-document.getElementById(
-"fullscreenBtn"
-);
-
-
-fullscreenBtn.addEventListener(
-"click",
-async()=>{
-
-try{
-
-if(!document.fullscreenElement){
-
-await document.documentElement.requestFullscreen();
-
+    saveTransaction();
 }
 
+
+document
+    .getElementById(
+        "successClose"
+    )
+    .addEventListener(
+        "click",
+        function() {
+
+            orderModal.classList.remove(
+                "show"
+            );
+
+            resetPaymentWindow();
+        }
+    );
+
+
+/* HISTORY */
+
+function saveTransaction() {
+
+    const username =
+        normalize(
+            usernameInput.value
+        ) ||
+        "Compte TikTok";
+
+    const avatar =
+        document
+            .getElementById(
+                "accountAvatar"
+            )
+            .getAttribute("src") ||
+        "";
+
+    const transaction = {
+
+        username: username,
+
+        coins: selectedCoins,
+
+        price: selectedPrice,
+
+        method: selectedMethod,
+
+        avatar: avatar,
+
+        date:
+            new Date()
+                .toLocaleString("fr-FR")
+    };
+
+    transactionHistory.unshift(
+        transaction
+    );
+
+    if (
+        transactionHistory.length > 30
+    ) {
+
+        transactionHistory =
+            transactionHistory.slice(
+                0,
+                30
+            );
+    }
+
+    renderHistory();
 }
 
-catch(error){
 
-console.log(
-"Impossible d'activer le plein écran :",
-error
-);
+function renderHistory() {
 
+    const list =
+        document.getElementById(
+            "historyList"
+        );
+
+    if (!transactionHistory.length) {
+
+        list.innerHTML =
+            '<div style="color:#777;font-size:14px;padding:20px 0;text-align:center;">Aucune transaction pour le moment.</div>';
+
+        return;
+    }
+
+    list.innerHTML =
+        transactionHistory
+            .map(transaction => {
+
+                const avatarHTML =
+                    transaction.avatar
+                        ? `
+                            <img
+                                class="history-avatar"
+                                src="${escapeHTML(transaction.avatar)}"
+                                alt=""
+                                onerror="this.style.visibility='hidden';"
+                            >
+                          `
+                        : `
+                            <div class="history-avatar"></div>
+                          `;
+
+                return `
+                    <div class="history-item">
+
+                        ${avatarHTML}
+
+                        <div class="history-info">
+
+                            <div class="history-name">
+                                ${escapeHTML(
+                                    transaction.username
+                                )}
+                            </div>
+
+                            <div class="history-date">
+                                ${escapeHTML(
+                                    transaction.date
+                                )}
+                            </div>
+
+                        </div>
+
+                        <div>
+
+                            <div class="history-coins">
+                                🪙 ${formatNumber(
+                                    transaction.coins
+                                )}
+                            </div>
+
+                            <div class="history-price">
+                                ${formatPrice(
+                                    transaction.price
+                                )}
+                            </div>
+
+                        </div>
+
+                    </div>
+                `;
+
+            })
+            .join("");
 }
 
+
+document
+    .getElementById(
+        "menuBtn"
+    )
+    .addEventListener(
+        "click",
+        function() {
+
+            renderHistory();
+
+            document
+                .getElementById(
+                    "historyModal"
+                )
+                .classList.add(
+                    "show"
+                );
+        }
+    );
+
+
+document
+    .getElementById(
+        "historyClose"
+    )
+    .addEventListener(
+        "click",
+        function() {
+
+            document
+                .getElementById(
+                    "historyModal"
+                )
+                .classList.remove(
+                    "show"
+                );
+        }
+    );
+
+
+/* BACK */
+
+document
+    .getElementById(
+        "backBtn"
+    )
+    .addEventListener(
+        "click",
+        function() {
+
+            if (
+                window.history.length > 1
+            ) {
+
+                window.history.back();
+
+            } else {
+
+                usernameInput.value = "";
+
+                document
+                    .getElementById(
+                        "accountCard"
+                    )
+                    .classList.remove(
+                        "show"
+                    );
+
+                selectedCoins = null;
+                selectedPrice = null;
+
+                coinCards.forEach(c =>
+                    c.classList.remove(
+                        "selected"
+                    )
+                );
+
+                buyBtn.disabled = true;
+            }
+        }
+    );
+
+
+/* CLOSE OUTSIDE */
+
+document
+    .querySelectorAll(
+        ".modal-overlay"
+    )
+    .forEach(overlay => {
+
+        overlay.addEventListener(
+            "click",
+            function(event) {
+
+                if (
+                    event.target === overlay
+                ) {
+
+                    if (
+                        overlay ===
+                        orderModal
+                    ) {
+
+                        stopPaymentTimer();
+
+                        resetPaymentWindow();
+                    }
+
+                    overlay.classList.remove(
+                        "show"
+                    );
+                }
+            }
+        );
+    });
+
+
+/* FULLSCREEN */
+
+const fullscreenBtn =
+    document.getElementById(
+        "fullscreenBtn"
+    );
+
+if (fullscreenBtn) {
+
+    fullscreenBtn.addEventListener(
+        "click",
+        async function() {
+
+            try {
+
+                if (
+                    !document.fullscreenElement &&
+                    !document.webkitFullscreenElement
+                ) {
+
+                    if (
+                        document
+                            .documentElement
+                            .requestFullscreen
+                    ) {
+
+                        await document
+                            .documentElement
+                            .requestFullscreen();
+
+                    } else if (
+                        document
+                            .documentElement
+                            .webkitRequestFullscreen
+                    ) {
+
+                        document
+                            .documentElement
+                            .webkitRequestFullscreen();
+
+                    } else if (
+                        document
+                            .documentElement
+                            .webkitRequestFullScreen
+                    ) {
+
+                        document
+                            .documentElement
+                            .webkitRequestFullScreen();
+                    }
+
+                } else {
+
+                    if (
+                        document.exitFullscreen
+                    ) {
+
+                        await document
+                            .exitFullscreen();
+
+                    } else if (
+                        document.webkitExitFullscreen
+                    ) {
+
+                        document
+                            .webkitExitFullscreen();
+                    }
+                }
+
+            } catch (error) {
+
+                console.log(
+                    "Impossible d'activer le plein écran :",
+                    error
+                );
+            }
+        }
+    );
+
+
+    function updateFullscreenButton() {
+
+        const isFullscreen =
+            !!document.fullscreenElement ||
+            !!document.webkitFullscreenElement;
+
+        fullscreenBtn.style.display =
+            isFullscreen
+                ? "none"
+                : "block";
+    }
+
+
+    document.addEventListener(
+        "fullscreenchange",
+        updateFullscreenButton
+    );
+
+    document.addEventListener(
+        "webkitfullscreenchange",
+        updateFullscreenButton
+    );
+
+    updateFullscreenButton();
 }
-);
 
 
-document.addEventListener(
-"fullscreenchange",
-()=>{
+/* INITIALISATION */
 
-fullscreenBtn.style.display=
-document.fullscreenElement
-?"none"
-:"block";
+updateCustomDisplay();
 
-}
-);
-
-
-/* =========================
-   INITIALISATION
-========================= */
-
-setBuyText();
+renderHistory();
 
 </script>
 
