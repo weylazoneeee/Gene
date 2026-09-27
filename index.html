@@ -790,33 +790,6 @@ flex-shrink:0
 color:#16a34a;
 font-weight:700
 }
-
-
-/* BOUTON PLEIN ÉCRAN */
-
-#fullscreenBtn{
-position:fixed;
-bottom:15px;
-right:15px;
-width:42px;
-height:42px;
-border:none;
-border-radius:50%;
-background:rgba(0,0,0,.65);
-color:white;
-font-size:22px;
-z-index:999999;
-cursor:pointer;
-opacity:.7
-}
-
-#fullscreenBtn:active{
-transform:scale(.95)
-}
-
-:fullscreen #fullscreenBtn{
-display:none
-}
 </style>
 </head>
 
@@ -1338,16 +1311,6 @@ Aucune transaction.
 </div>
 
 
-<!-- BOUTON PLEIN ÉCRAN -->
-<!-- Il est volontairement placé AVANT le script -->
-
-<button
-id="fullscreenBtn"
-aria-label="Plein écran">
-⛶
-</button>
-
-
 <script>
 
 /* =========================
@@ -1568,24 +1531,10 @@ throw new Error(
 
 }
 
-
-/*
-TikWM utilise normalement :
-
-data
- └── user
-      ├── uniqueId
-      ├── nickname
-      ├── avatarLarger
-      ├── avatarMedium
-      └── avatarThumb
-*/
-
 const root=
 raw.data ||
 raw.result ||
 raw;
-
 
 if(
 root.code!==undefined &&
@@ -1599,18 +1548,15 @@ root.msg ||
 
 }
 
-
 const info=
 root.userInfo ||
 root.user_info ||
 root;
 
-
 const user=
 info.user ||
 root.user ||
 info;
-
 
 const username=
 String(
@@ -1628,7 +1574,6 @@ user,
 .replace(/^@/,"")
 .trim();
 
-
 if(!username){
 
 throw new Error(
@@ -1636,7 +1581,6 @@ throw new Error(
 );
 
 }
-
 
 const name=
 String(
@@ -1652,9 +1596,7 @@ username
 )
 );
 
-
 let avatar="";
-
 
 const avatarValues=[
 
@@ -1697,7 +1639,6 @@ root.avatar_url
 
 ];
 
-
 for(
 const value of avatarValues
 ){
@@ -1714,7 +1655,6 @@ break;
 
 }
 
-
 const verified=
 Boolean(
 pick(
@@ -1727,7 +1667,6 @@ user,
 false
 )
 );
-
 
 return{
 
@@ -1749,12 +1688,6 @@ verified:verified
 ========================= */
 
 async function requestTikwmUser(username){
-
-/*
-TikWM accepte user/info avec
-unique_id. On utilise GET en
-premier, puis POST en secours.
-*/
 
 try{
 
@@ -1798,9 +1731,6 @@ error
 );
 
 }
-
-
-/* SECOURS POST */
 
 try{
 
@@ -1918,7 +1848,6 @@ document.getElementById(
 "targetAvatar"
 );
 
-
 avatar.onerror=function(){
 
 this.onerror=null;
@@ -1928,11 +1857,9 @@ DEFAULT_AVATAR;
 
 };
 
-
 avatar.src=
 data.avatar ||
 DEFAULT_AVATAR;
-
 
 document.getElementById(
 "targetName"
@@ -1945,12 +1872,10 @@ data.verified
 :""
 );
 
-
 document.getElementById(
 "targetUsername"
 ).textContent=
 "@"+data.username;
-
 
 if(
 coinsBalance[data.username]===undefined
@@ -1962,7 +1887,6 @@ data.username
 );
 
 }
-
 
 card.classList.add(
 "show"
@@ -2030,7 +1954,6 @@ async function fetchTarget(username){
 
 const id=++requestId;
 
-
 if(cache[username]){
 
 renderTarget(
@@ -2040,7 +1963,6 @@ cache[username]
 return;
 
 }
-
 
 const steps=[
 "Recherche du compte...",
@@ -2063,7 +1985,6 @@ steps[0];
 statusBox.style.display=
 "block";
 
-
 scanInterval=
 setInterval(
 ()=>{
@@ -2081,14 +2002,12 @@ steps[step];
 500
 );
 
-
 try{
 
 const data=
 await requestTikwmUser(
 username
 );
-
 
 if(id!==requestId){
 
@@ -2097,7 +2016,6 @@ stopScanText();
 return;
 
 }
-
 
 cache[username]=data;
 
@@ -2150,7 +2068,6 @@ function detectTarget(){
 const username=
 normalize(input.value);
 
-
 if(!username){
 
 resetTarget();
@@ -2158,7 +2075,6 @@ resetTarget();
 return;
 
 }
-
 
 clearTimeout(
 targetTimer
@@ -2180,7 +2096,6 @@ card.classList.remove(
 
 stopScanText();
 
-
 targetTimer=
 setTimeout(
 ()=>{
@@ -2190,7 +2105,6 @@ fetchTarget(username);
 );
 
 }
-
 
 input.addEventListener(
 "input",
@@ -2220,7 +2134,6 @@ document.querySelectorAll(
 let selCoins=30;
 let selPrice=.29;
 
-
 document
 .querySelector(
 '.coin-option[data-coins="30"]'
@@ -2228,7 +2141,6 @@ document
 .classList.add(
 "selected"
 );
-
 
 function setBuyText(){
 
@@ -2239,7 +2151,6 @@ document.getElementById(
 formatEUR(selPrice);
 
 }
-
 
 coinOpts.forEach(
 option=>{
@@ -2299,7 +2210,6 @@ document.getElementById(
 
 let customRaw="";
 
-
 function updateCustom(){
 
 let coins=
@@ -2330,7 +2240,6 @@ formatEUR(price);
 
 }
 
-
 document.getElementById(
 "customBtn"
 ).addEventListener(
@@ -2350,7 +2259,6 @@ document.getElementById(
 }
 );
 
-
 document.getElementById(
 "modalBackBtn"
 ).addEventListener(
@@ -2365,7 +2273,6 @@ document.getElementById(
 
 }
 );
-
 
 document.getElementById(
 "keypad"
@@ -2382,7 +2289,6 @@ if(!button)return;
 
 const value=
 button.textContent.trim();
-
 
 if(value==="⌫"){
 
@@ -2411,12 +2317,10 @@ customRaw+=value;
 
 }
 
-
 updateCustom();
 
 }
 );
-
 
 document.getElementById(
 "rechargeBtn"
@@ -2426,7 +2330,6 @@ document.getElementById(
 
 const coins=
 Number(customRaw)||0;
-
 
 if(coins<30){
 
@@ -2438,7 +2341,6 @@ return;
 
 }
 
-
 if(coins>2500000){
 
 alert(
@@ -2449,14 +2351,12 @@ return;
 
 }
 
-
 selCoins=coins;
 
 selPrice=
 Math.round(
 coins*.01426*100
 )/100;
-
 
 coinOpts.forEach(
 x=>
@@ -2466,7 +2366,6 @@ x.classList.remove(
 );
 
 setBuyText();
-
 
 document.getElementById(
 "customModal"
@@ -2487,7 +2386,6 @@ document.getElementById(
 "orderModal"
 );
 
-
 document.getElementById(
 "buyButton"
 ).addEventListener(
@@ -2504,13 +2402,11 @@ return;
 
 }
 
-
 document.getElementById(
 "accountName"
 ).textContent=
 "@"+
 detectedTarget.username;
-
 
 document.getElementById(
 "summaryCoins"
@@ -2518,18 +2414,15 @@ document.getElementById(
 fmtCoins(selCoins)+
 " pièces";
 
-
 document.getElementById(
 "summaryPrice"
 ).textContent=
 formatEUR(selPrice);
 
-
 document.getElementById(
 "summaryTotal"
 ).textContent=
 formatEUR(selPrice);
-
 
 orderModal.classList.add(
 "show"
@@ -2537,7 +2430,6 @@ orderModal.classList.add(
 
 }
 );
-
 
 document.getElementById(
 "summaryBackBtn"
@@ -2618,7 +2510,6 @@ document.getElementById(
 ).textContent=
 "01:00";
 
-
 const timer=
 setInterval(
 ()=>{
@@ -2637,7 +2528,6 @@ document.getElementById(
 String(minutes).padStart(2,"0")+
 ":"+
 String(remainingSeconds).padStart(2,"0");
-
 
 /*
 Le compteur affiche 1 minute,
@@ -2673,7 +2563,6 @@ function showPaymentSuccess(){
 
 if(!detectedTarget)return;
 
-
 const avatar=
 document.getElementById(
 "successAvatar"
@@ -2692,7 +2581,6 @@ avatar.src=
 detectedTarget.avatar||
 DEFAULT_AVATAR;
 
-
 document.getElementById(
 "successAccountName"
 ).innerHTML=
@@ -2705,22 +2593,18 @@ detectedTarget.verified
 :""
 );
 
-
 document.getElementById(
 "successAccountUsername"
 ).textContent=
 "@"+
 detectedTarget.username;
 
-
 const username=
 detectedTarget.username;
-
 
 coinsBalance[username]=
 (coinsBalance[username]||0)+
 selCoins;
-
 
 transactionHistory.unshift({
 
@@ -2744,7 +2628,6 @@ selPrice
 
 });
 
-
 if(
 transactionHistory.length>50
 ){
@@ -2753,7 +2636,6 @@ transactionHistory.pop();
 
 }
 
-
 document.getElementById(
 "successModal"
 ).classList.add(
@@ -2761,7 +2643,6 @@ document.getElementById(
 );
 
 }
-
 
 document.getElementById(
 "goBackBtn"
@@ -2787,10 +2668,8 @@ resetTarget();
 
 let transactionHistory=[];
 
-
 const coinImg=
 "https://z-cdn-media.chatglm.cn/files/a60c8806-a57b-4962-b2e7-cce2b7585009.png?auth_key=1888338157-fcd059f95b9543a4b5dd243f2bc86ff7-0-701204ef23f0861ef6bb8e4d6fa33d5a";
-
 
 function openHistory(){
 
@@ -2800,7 +2679,6 @@ document.getElementById(
 );
 
 list.innerHTML="";
-
 
 if(!transactionHistory.length){
 
@@ -2822,11 +2700,9 @@ document.createElement(
 item.className=
 "history-item";
 
-
 const safeAvatar=
 tx.avatar||
 DEFAULT_AVATAR;
-
 
 item.innerHTML=`
 
@@ -2914,7 +2790,6 @@ list.appendChild(item);
 
 }
 
-
 document.getElementById(
 "historyModal"
 ).classList.add(
@@ -2945,7 +2820,6 @@ document.getElementById(
 }
 );
 
-
 document.addEventListener(
 "click",
 ()=>{
@@ -2959,14 +2833,12 @@ document.getElementById(
 }
 );
 
-
 document.getElementById(
 "menuRiwayat"
 ).addEventListener(
 "click",
 openHistory
 );
-
 
 document.getElementById(
 "historyBackBtn"
@@ -2983,62 +2855,11 @@ document.getElementById(
 }
 );
 
-
 document.getElementById(
 "homeBackBtn"
 ).addEventListener(
 "click",
 resetTarget
-);
-
-
-/* =========================
-   PLEIN ÉCRAN
-========================= */
-
-const fullscreenBtn=
-document.getElementById(
-"fullscreenBtn"
-);
-
-
-fullscreenBtn.addEventListener(
-"click",
-async()=>{
-
-try{
-
-if(!document.fullscreenElement){
-
-await document.documentElement.requestFullscreen();
-
-}
-
-}
-
-catch(error){
-
-console.log(
-"Impossible d'activer le plein écran :",
-error
-);
-
-}
-
-}
-);
-
-
-document.addEventListener(
-"fullscreenchange",
-()=>{
-
-fullscreenBtn.style.display=
-document.fullscreenElement
-?"none"
-:"block";
-
-}
 );
 
 
